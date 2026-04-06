@@ -60,6 +60,7 @@ export {
   ClipboardList,
 
   // ── Misc ─────────────────────────────────────
+  CalendarRange,
   ChevronRight,
   X,
   Check,

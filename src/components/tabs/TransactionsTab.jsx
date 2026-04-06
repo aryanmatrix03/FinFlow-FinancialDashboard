@@ -4,17 +4,25 @@ import EmptyState from "../ui/EmptyState";
 import { ALL_CATEGORIES } from "../../constants";
 import { fmtINR, fmtDate } from "../../utils/formatters";
 import { exportCSV, exportJSON } from "../../utils/exportData";
-import { CreditCard, SearchX } from "../../constants/icons";
+import { CalendarRange, CreditCard, SearchX, X } from "../../constants/icons";
 
 export default function TransactionsTab({
   filteredTx, transactions,
   role,
   search, filterType, filterCat, sortKey,
+  filterFromDate, filterToDate, maxDate,
   onSearch, onFilterType, onFilterCat, onSortKey,
+  onFilterFromDate, onFilterToDate,
   onEdit, onDelete, onAdd,
 }) {
   const [exportOpen, setExportOpen] = useState(false);
-  const hasFilters = search || filterType !== "all" || filterCat !== "all";
+  const hasDateRange = !!(filterFromDate || filterToDate);
+  const hasFilters =
+    search ||
+    filterType !== "all" ||
+    filterCat !== "all" ||
+    filterFromDate ||
+    filterToDate;
 
   const handleExport = (fmt) => {
     if (fmt === "csv")  exportCSV(transactions);
@@ -26,24 +34,82 @@ export default function TransactionsTab({
     <div className="fd-fade">
       {/* Filter bar */}
       <div className="fd-filter-bar">
-        <input className="fd-input" style={{ flex: 1, minWidth: 160 }}
+        <input className="fd-input fd-filter-control" style={{ flex: 1, minWidth: 240 }}
                placeholder="🔍  Search transactions or dates…" aria-label="Search transactions"
                value={search} onChange={e => onSearch(e.target.value)} />
 
-        <select className="fd-input" style={{ width: 140 }} aria-label="Filter by type"
+        <select className="fd-input fd-filter-control" style={{ width: 170 }} aria-label="Filter by type"
                 value={filterType} onChange={e => onFilterType(e.target.value)}>
           <option value="all">All Types</option>
           <option value="income">Income</option>
           <option value="expense">Expense</option>
         </select>
 
-        <select className="fd-input" style={{ width: 155 }} aria-label="Filter by category"
+        <select className="fd-input fd-filter-control" style={{ width: 190 }} aria-label="Filter by category"
                 value={filterCat} onChange={e => onFilterCat(e.target.value)}>
           <option value="all">All Categories</option>
           {ALL_CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
         </select>
 
-        <select className="fd-input" style={{ width: 165 }} aria-label="Sort transactions"
+        <div className="fd-date-range" aria-label="Filter by date range">
+          <div className="fd-date-range-badge" aria-hidden="true">
+            <CalendarRange size={14} strokeWidth={2} />
+          </div>
+
+          <div className="fd-date-range-body">
+            <div className="fd-date-range-head">
+              <span className="fd-date-range-title">Date Range</span>
+              <span className={`fd-date-range-status${hasDateRange ? " active" : ""}`}>
+                {hasDateRange ? "Custom" : "Any time"}
+              </span>
+            </div>
+
+            <div className="fd-date-range-controls">
+              <div className="fd-date-range-field">
+                <span className="fd-date-range-label">From</span>
+                <input
+                  className="fd-date-range-input"
+                  type="date"
+                  max={filterToDate || maxDate}
+                  value={filterFromDate}
+                  onChange={e => onFilterFromDate(e.target.value)}
+                  aria-label="Filter from date"
+                />
+              </div>
+
+              <span className="fd-date-range-sep" aria-hidden="true">to</span>
+
+              <div className="fd-date-range-field">
+                <span className="fd-date-range-label">To</span>
+                <input
+                  className="fd-date-range-input"
+                  type="date"
+                  min={filterFromDate || undefined}
+                  max={maxDate}
+                  value={filterToDate}
+                  onChange={e => onFilterToDate(e.target.value)}
+                  aria-label="Filter to date"
+                />
+              </div>
+            </div>
+          </div>
+
+          {hasDateRange && (
+            <button
+              className="fd-date-range-clear"
+              onClick={() => {
+                onFilterFromDate("");
+                onFilterToDate("");
+              }}
+              aria-label="Clear date range"
+              title="Clear date range"
+            >
+              <X size={12} strokeWidth={2} aria-hidden="true" />
+            </button>
+          )}
+        </div>
+
+        <select className="fd-input fd-filter-control" style={{ width: 215 }} aria-label="Sort transactions"
                 value={sortKey} onChange={e => onSortKey(e.target.value)}>
           <option value="date-desc">Date (Newest First)</option>
           <option value="date-asc">Date (Oldest First)</option>

@@ -193,6 +193,162 @@ body {
 .fd-input:focus { border-color: var(--fd-accent); }
 .fd-input.error { border-color: var(--fd-expense) !important; }
 
+.fd-filter-control {
+  height: 52px;
+  min-height: 52px;
+  padding: 13px 16px;
+  line-height: 1.2;
+  font-size: 14px;
+}
+
+.fd-date-range {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  min-width: 400px;
+  min-height: 52px;
+  padding: 10px 12px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0)),
+    var(--fd-bg-input);
+  border: 1px solid var(--fd-border-input);
+  border-radius: 14px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.02);
+  transition: border-color .2s, background .25s, box-shadow .2s, transform .15s;
+}
+.fd-date-range:hover {
+  border-color: var(--fd-accent-border);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.03), 0 6px 18px rgba(0,0,0,.06);
+}
+.fd-date-range:focus-within {
+  border-color: var(--fd-accent);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.03), 0 0 0 3px var(--fd-accent-hover);
+}
+.fd-date-range-badge {
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  margin-top: 3px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--fd-accent);
+  background: linear-gradient(135deg, var(--fd-accent-hover), rgba(16,185,129,.16));
+  border: 1px solid var(--fd-accent-border);
+}
+.fd-date-range-body {
+  min-width: 0;
+  flex: 1;
+}
+.fd-date-range-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.fd-date-range-title {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .4px;
+  color: var(--fd-text-primary);
+}
+.fd-date-range-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 7px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  color: var(--fd-text-subtle);
+  background: var(--fd-bg-sub);
+  border: 1px solid var(--fd-border);
+  white-space: nowrap;
+}
+.fd-date-range-status.active {
+  color: var(--fd-accent);
+  background: var(--fd-accent-hover);
+  border-color: var(--fd-accent-border);
+}
+.fd-date-range-controls {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+}
+.fd-date-range-field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 9px;
+  background: var(--fd-bg-card);
+  border: 1px solid var(--fd-border);
+}
+.fd-date-range-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  color: var(--fd-text-faint);
+}
+.fd-date-range-input {
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: var(--fd-text-body);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  outline: none;
+}
+.fd-date-range-input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: .78;
+}
+.fd-date-range-sep {
+  align-self: center;
+  flex-shrink: 0;
+  padding: 6px 8px;
+  border-radius: 999px;
+  background: var(--fd-bg-sub);
+  border: 1px solid var(--fd-border);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  color: var(--fd-text-faint);
+}
+.fd-date-range-clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  align-self: center;
+  background: var(--fd-bg-card);
+  border: 1px solid var(--fd-border-input);
+  border-radius: 8px;
+  color: var(--fd-text-muted);
+  cursor: pointer;
+  transition: background .15s, color .15s, border-color .15s, transform .1s;
+}
+.fd-date-range-clear:hover {
+  background: var(--fd-accent-hover);
+  color: var(--fd-accent);
+  border-color: var(--fd-accent-border);
+}
+.fd-date-range-clear:active { transform: scale(.97); }
+.fd-date-range-clear:focus-visible { outline: 2px solid var(--fd-accent); outline-offset: 2px; }
+
 /* ── Buttons ────────────────────────────────────────────────────────────── */
 .fd-btn-primary {
   background: linear-gradient(135deg, var(--fd-accent-solid), var(--fd-accent-dark));
@@ -375,7 +531,13 @@ body {
 /* ══════════════════════════════════════════════════════════════════════════
    RESPONSIVE GRID CLASSES
    ══════════════════════════════════════════════════════════════════════════ */
-.fd-filter-bar { display: flex; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
+.fd-filter-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
 
 .fd-grid-kpi {
   display: grid; grid-template-columns: repeat(4,1fr);
@@ -429,7 +591,26 @@ body {
 
   .fd-filter-bar { flex-direction: column; }
   .fd-filter-bar .fd-input,
-  .fd-filter-bar select { width: 100% !important; }
+  .fd-filter-bar select,
+  .fd-date-range { width: 100% !important; }
+  .fd-date-range {
+    min-width: 0;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .fd-date-range-badge {
+    width: 28px;
+    min-width: 28px;
+    height: 28px;
+  }
+  .fd-date-range-head,
+  .fd-date-range-controls {
+    flex-wrap: wrap;
+  }
+  .fd-date-range-sep {
+    width: 100%;
+    text-align: center;
+  }
 
   .fd-toast-wrap { right: 12px; left: 12px; bottom: 16px; }
   .fd-toast { font-size: 12px; padding: 10px 14px; }
