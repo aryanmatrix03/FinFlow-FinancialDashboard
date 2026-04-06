@@ -213,6 +213,7 @@ The Transactions tab is the operational workspace of the dashboard.
 Users can search transactions by:
 
 - Description
+- Dates
 - Category name
 
 The filtering is case-insensitive and updates the table immediately.
@@ -221,7 +222,7 @@ The filtering is case-insensitive and updates the table immediately.
 
 Users can narrow the dataset using:
 
-- Type filter: all, income, or expense
+- Type filter: all, income, expense or custom dates filter
 - Category filter: all or a specific category
 
 #### Sorting
