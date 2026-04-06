@@ -34,21 +34,29 @@ export default function TransactionsTab({
     <div className="fd-fade">
       {/* Filter bar */}
       <div className="fd-filter-bar">
-        <input className="fd-input fd-filter-control" style={{ flex: 1, minWidth: 240 }}
+        <input className="fd-input fd-filter-control" style={{ flex: "1 1 220px", minWidth: 220 }}
                placeholder="🔍  Search transactions or dates…" aria-label="Search transactions"
                value={search} onChange={e => onSearch(e.target.value)} />
 
-        <select className="fd-input fd-filter-control" style={{ width: 170 }} aria-label="Filter by type"
+        <select className="fd-input fd-filter-control" style={{ width: 150 }} aria-label="Filter by type"
                 value={filterType} onChange={e => onFilterType(e.target.value)}>
           <option value="all">All Types</option>
           <option value="income">Income</option>
           <option value="expense">Expense</option>
         </select>
 
-        <select className="fd-input fd-filter-control" style={{ width: 190 }} aria-label="Filter by category"
+        <select className="fd-input fd-filter-control" style={{ width: 170 }} aria-label="Filter by category"
                 value={filterCat} onChange={e => onFilterCat(e.target.value)}>
           <option value="all">All Categories</option>
           {ALL_CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
+        </select>
+
+        <select className="fd-input fd-filter-control" style={{ width: 195 }} aria-label="Sort transactions"
+                value={sortKey} onChange={e => onSortKey(e.target.value)}>
+          <option value="date-desc">Date (Newest First)</option>
+          <option value="date-asc">Date (Oldest First)</option>
+          <option value="amount-desc">Amount (High → Low)</option>
+          <option value="amount-asc">Amount (Low → High)</option>
         </select>
 
         <div className="fd-date-range" aria-label="Filter by date range">
@@ -108,14 +116,6 @@ export default function TransactionsTab({
             </button>
           )}
         </div>
-
-        <select className="fd-input fd-filter-control" style={{ width: 215 }} aria-label="Sort transactions"
-                value={sortKey} onChange={e => onSortKey(e.target.value)}>
-          <option value="date-desc">Date (Newest First)</option>
-          <option value="date-asc">Date (Oldest First)</option>
-          <option value="amount-desc">Amount (High → Low)</option>
-          <option value="amount-asc">Amount (Low → High)</option>
-        </select>
 
         {/* Export */}
         {transactions.length > 0 && (

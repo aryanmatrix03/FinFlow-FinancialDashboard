@@ -205,7 +205,9 @@ body {
   display: flex;
   align-items: stretch;
   gap: 12px;
-  min-width: 400px;
+  flex: 1 1 340px;
+  min-width: 340px;
+  max-width: 380px;
   min-height: 52px;
   padding: 10px 12px;
   background:
@@ -537,6 +539,12 @@ body {
   margin-bottom: 18px;
   flex-wrap: wrap;
   align-items: flex-start;
+}
+
+@media (min-width: 1200px) {
+  .fd-filter-bar {
+    flex-wrap: nowrap;
+  }
 }
 
 .fd-grid-kpi {
