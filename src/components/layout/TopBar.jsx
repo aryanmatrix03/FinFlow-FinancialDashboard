@@ -150,12 +150,7 @@ export default function TopBar({
   });
 
   const dropdownWrap = (width) => ({
-    position: "absolute", top: "calc(100% + 10px)", right: 0,
-    width, background: "var(--fd-bg-card)",
-    border: "1px solid var(--fd-border)",
-    borderRadius: 14, boxShadow: "var(--fd-shadow)",
-    zIndex: 300, overflow: "hidden",
-    animation: "fdFade .2s ease",
+    "--fd-dropdown-width": `${width}px`,
   });
 
   const menuRowBase = {
@@ -207,7 +202,7 @@ export default function TopBar({
         </div>
 
         {/* ── Right: action buttons ── */}
-        <div style={{ display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
+        <div className="fd-topbar-actions" style={{ display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
 
           {showAddBtn && (
             <button className="fd-btn-primary" onClick={onAdd} aria-label="Add a new transaction">
@@ -229,7 +224,7 @@ export default function TopBar({
             </button>
 
             {notifOpen && (
-              <div style={dropdownWrap(340)}>
+              <div className="fd-topbar-dropdown" style={dropdownWrap(340)}>
                 <DropdownHeader
                   title={
                     <span>
@@ -316,7 +311,7 @@ export default function TopBar({
             </button>
 
             {settingsOpen && (
-              <div style={dropdownWrap(260)}>
+              <div className="fd-topbar-dropdown" style={dropdownWrap(260)}>
                 <DropdownHeader title="Settings" />
                 <div style={{ padding: "6px 0 8px" }}>
                   {SETTINGS_ITEMS.map(({ label, sub, Icon: SIcon, color }) => (
@@ -358,7 +353,7 @@ export default function TopBar({
             </button>
 
             {helpOpen && (
-              <div style={dropdownWrap(272)}>
+              <div className="fd-topbar-dropdown" style={dropdownWrap(272)}>
                 <DropdownHeader title="Help & Support" />
                 <div style={{ padding: "10px 12px 12px" }}>
                   {HELP_ITEMS.map(({ label, sub, Icon: HIcon, color }) => (

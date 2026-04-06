@@ -21,6 +21,28 @@ export const fmtDate = (d) =>
     month: "short",
   });
 
+/**
+ * Build search-friendly date text for transaction filtering.
+ * Includes the ISO date plus short and long human-readable formats.
+ */
+export const getDateSearchText = (d) => {
+  const date = new Date(d + "T00:00:00");
+  return [
+    d,
+    fmtDate(d),
+    date.toLocaleDateString("en-IN", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }),
+    date.toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    }),
+  ].join(" ").toLowerCase();
+};
+
 /** Full date label shown in the page header, e.g. "3 April 2026" */
 export const todayLabel = new Date().toLocaleDateString("en-IN", {
   day: "numeric",

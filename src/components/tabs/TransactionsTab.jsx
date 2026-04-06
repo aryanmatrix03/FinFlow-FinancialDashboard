@@ -27,7 +27,7 @@ export default function TransactionsTab({
       {/* Filter bar */}
       <div className="fd-filter-bar">
         <input className="fd-input" style={{ flex: 1, minWidth: 160 }}
-               placeholder="🔍  Search transactions…" aria-label="Search transactions"
+               placeholder="🔍  Search transactions or dates…" aria-label="Search transactions"
                value={search} onChange={e => onSearch(e.target.value)} />
 
         <select className="fd-input" style={{ width: 140 }} aria-label="Filter by type"

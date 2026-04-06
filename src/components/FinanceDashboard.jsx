@@ -15,6 +15,7 @@ import { useTransactions } from "../hooks/useTransactions";
 import { useToast }        from "../hooks/useToast";
 import { useTheme }        from "../hooks/useTheme";
 import { EMPTY_FORM }      from "../constants";
+import { getDateSearchText } from "../utils/formatters";
 
 const PAGE_TITLES = {
   overview:     "Financial Overview",
@@ -86,8 +87,12 @@ export default function FinanceDashboard() {
     const [sKey, sDir] = sortKey.split("-");
     return transactions
       .filter(t => {
-        const q      = search.toLowerCase();
-        const matchS = t.desc.toLowerCase().includes(q) || t.category.toLowerCase().includes(q);
+        const q = search.trim().toLowerCase();
+        const matchS =
+          t.desc.toLowerCase().includes(q) ||
+          t.category.toLowerCase().includes(q) ||
+          t.type.toLowerCase().includes(q) ||
+          getDateSearchText(t.date).includes(q);
         const matchT = filterType === "all" || t.type === filterType;
         const matchC = filterCat  === "all" || t.category === filterCat;
         return matchS && matchT && matchC;
