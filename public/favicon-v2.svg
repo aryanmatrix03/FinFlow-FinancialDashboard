@@ -1,0 +1,19 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="finflowGradV2" x1="14" y1="12" x2="50" y2="52" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#10B981" />
+      <stop offset="1" stop-color="#059669" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="#07101E" />
+  <rect x="14" y="14" width="36" height="36" rx="11" fill="url(#finflowGradV2)" />
+  <text
+    x="32"
+    y="40"
+    text-anchor="middle"
+    font-size="22"
+    font-weight="800"
+    font-family="Syne, Arial, sans-serif"
+    fill="#FFFFFF"
+  >F</text>
+</svg>
